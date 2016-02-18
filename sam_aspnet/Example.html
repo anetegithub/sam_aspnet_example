@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Example</title>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+    <div style="width:600px">
+        <div id="view" style="float:left;width:250px;">
+            <h1>View</h1>
+            <hr />
+            <dl>
+                <dt>Name</dt>
+                <dd><input type="text" name="viewName" value="Andrew" /></dd>
+                <dt>Age</dt>
+                <dd><input type="number" name="viewAge" value="27" /></dd>
+                <dt>Weight</dt>
+                <dd><input type="number" name="viewWeight" value="69" /></dd>
+            </dl>
+            <button onclick="app.send();">Send</button>
+        </div>
+        <div style="float:right;width:250px;">
+            <h1>State</h1>
+            <hr />
+            <div id="state">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        app = {
+            send: function () {
+                $.post("/AggregateAction/Index", {
+                    Name: $('[name="viewName"]').val(),
+                    Age: $('[name="viewAge"]').val(),
+                    Weight: $('[name="viewWeight"]').val(),
+                }, function success(data) {
+                    $('#state').html(data.Rendered);
+                })
+            }
+        }
+    </script>
+</body>
+</html>
